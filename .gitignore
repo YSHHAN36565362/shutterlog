@@ -1,0 +1,30 @@
+# OS
+.DS_Store
+Thumbs.db
+
+# 개발 도구
+node_modules/
+package.json
+package-lock.json
+__pycache__/
+*.pyc
+.venv/
+
+# 분석 결과물 (재생성 가능)
+analysis/output/
+
+# 도구가 내보낸 파일이 저장소에 섞여 들어가지 않게
+shutterlog-cull-*.txt
+shutterlog-cull-*.sh
+shutterlog-exif-*.csv
+shutterlog-*.png
+shutterlog-*.jpg
+
+# ─────────────────────────────────────────────────────────────
+# 원본 사진을 GitHub 에 올리고 싶지 않다면 아래 줄의 # 을 지우세요.
+# 사이트는 thumbs/ 만 있으면 동작합니다.
+# (단, 다른 컴퓨터에서 build.py 를 다시 돌릴 수는 없게 됩니다)
+# photos/**/*.JPG
+# photos/**/*.jpg
+# photos/**/*.jpeg
+# ─────────────────────────────────────────────────────────────

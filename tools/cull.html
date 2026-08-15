@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>選別 | Shutterlog Tools</title>
+<meta name="description" content="似たカットをまとめ、グループの中で相対的にシャープな一枚を提案します。ブラウザ内で完結し、写真はアップロードされません。" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230a0d12'/%3E%3Ccircle cx='16' cy='17' r='7' fill='none' stroke='%23ec5453' stroke-width='2'/%3E%3Cpath d='M9 10l2-3h10l2 3' fill='none' stroke='%23ec5453' stroke-width='2'/%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../style.css?v=5" />
+<link rel="stylesheet" href="../tools.css?v=1" />
+</head>
+<body style="--accent: var(--red)">
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header is-stuck">
+  <div class="wrap">
+    <a class="brand" href="../"><b>Shutterlog</b><span>Photo &amp; Travel</span></a>
+    <button type="button" class="nav-toggle js-nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="site-nav"><span></span></button>
+    <nav class="site-nav" id="site-nav" aria-label="Section">
+      <ul>
+        <li><a href="../#globe" data-i18n="nav.globe">Globe</a></li>
+        <li><a href="../#archive" data-i18n="nav.archive">Archive</a></li>
+        <li><a href="../#about" data-i18n="nav.about">About</a></li>
+      </ul>
+    </nav>
+    <div class="lang-switch" role="group" aria-label="Language / 言語 / 언어">
+      <button type="button" data-lang="ja" aria-pressed="true"  lang="ja">日本語</button>
+      <button type="button" data-lang="ko" aria-pressed="false" lang="ko">한국어</button>
+      <button type="button" data-lang="en" aria-pressed="false" lang="en">EN</button>
+    </div>
+  </div>
+</header>
+
+<main id="main" class="tool-page">
+  <div class="wrap">
+
+    <nav class="tool-steps" aria-label="Tools">
+      <a href="cull.html"  aria-current="page">01 <span data-i18n="cull.title">選別</span></a>
+      <a href="stats.html">02 <span data-i18n="stats.title">分析</span></a>
+      <a href="frame.html">03 <span data-i18n="frame.title">額装</span></a>
+    </nav>
+
+    <header class="tool-head">
+      <span class="step">STEP 01</span>
+      <h1 data-i18n="cull.title">選別</h1>
+      <p data-i18n="cull.lead">似たカットをまとめ、その中で相対的にシャープな一枚を提案します。判断と削除は必ずあなたが行います。</p>
+    </header>
+
+    <div class="warn-box" data-i18n="cull.warn"><b>このツールは何も削除しません。</b>ブラウザには元ファイルを消す権限がありません。書き出したリストを確認したうえで、ご自身で削除してください。</div>
+
+    <!-- 드롭존 -->
+    <section class="dropzone" id="dz">
+      <svg class="dz-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+        <rect x="2" y="6" width="20" height="14" rx="2"/><circle cx="12" cy="13" r="4"/><path d="M8 6l1.5-2.5h5L16 6"/>
+      </svg>
+      <h2 data-i18n="dz.title">写真をここにドロップ</h2>
+      <p class="dz-or" data-i18n="dz.or">または</p>
+      <label class="btn btn-primary" for="picker" data-i18n="dz.pick">ファイルを選ぶ</label>
+      <input type="file" id="picker" accept="image/*" multiple />
+      <p class="dz-note" data-i18n="dz.note">JPEG / PNG。写真は端末から出ません。</p>
+
+      <div class="progress" id="progress" hidden>
+        <div class="progress-bar"><span id="progress-fill"></span></div>
+        <p class="progress-text" id="progress-text">0 / 0</p>
+      </div>
+    </section>
+
+    <!-- 결과 -->
+    <div id="result" hidden>
+
+      <section class="panel" style="margin-top:26px">
+        <h2 data-i18n="trip.sortBy">条件</h2>
+        <div class="fields">
+          <div class="field">
+            <label for="opt-gap"><span data-i18n="cull.optGap">同じグループとみなす撮影間隔</span> — <span class="val" id="val-gap">4s</span></label>
+            <input type="range" id="opt-gap" min="1" max="20" step="1" value="4" />
+          </div>
+          <div class="field">
+            <label for="opt-focal"><span data-i18n="cull.optFocal">焦点距離の許容差</span> — <span class="val" id="val-focal">15%</span></label>
+            <input type="range" id="opt-focal" min="0" max="60" step="5" value="15" />
+          </div>
+          <div class="field">
+            <label for="opt-hash"><span data-i18n="cull.optHash">構図の類似度しきい値</span> — <span class="val" id="val-hash">12</span></label>
+            <input type="range" id="opt-hash" min="2" max="24" step="1" value="12" />
+          </div>
+        </div>
+        <p class="panel-help" data-i18n="cull.optHelp">時刻だけでまとめると、3 秒以内に別のものを撮った写真まで同じグループに入ってしまいます。焦点距離と構図ハッシュを併用して、その誤りを減らしています。</p>
+        <p class="panel-help" data-i18n="cull.blurNote">開放で背景をぼかした写真は画面全体の分散が下がるため、単純なスコアだと「ブレ」と誤判定されます。画面をタイルに分けていちばん鋭い部分だけを見て、さらに同じグループの中の相対順位でのみ判断しています。</p>
+      </section>
+
+      <div class="summary">
+        <div><b id="s-photos">0</b><span data-i18n="common.photos">枚</span></div>
+        <div><b id="s-groups">0</b><span data-i18n="cull.groups">グループ</span></div>
+        <div><b id="s-singles">0</b><span data-i18n="cull.singles">単独カット</span></div>
+        <div><b id="s-marked">0</b><span data-i18n="cull.marked">削除候補</span></div>
+      </div>
+
+      <div id="groups"></div>
+    </div>
+
+  </div>
+
+  <div class="sticky-actions" id="sticky" hidden>
+    <div class="wrap">
+      <span class="count"><b id="mark-count">0</b> <span data-i18n="cull.marked">削除候補</span></span>
+      <span class="spacer" style="flex:1"></span>
+      <button type="button" class="btn btn-sm btn-outline" id="btn-reset" data-i18n="common.reset">最初から</button>
+      <button type="button" class="btn btn-sm btn-outline" id="btn-txt" data-i18n="cull.exportTxt">削除リスト (.txt)</button>
+      <button type="button" class="btn btn-sm btn-primary" id="btn-sh" data-i18n="cull.exportSh">削除スクリプト (.sh)</button>
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p>&copy; <span id="year">2026</span> Younsu Han · 韓倫洙</p>
+    <nav>
+      <a href="../" data-i18n="nav.back">← Shutterlog</a>
+      <a href="https://yshhan36565362.github.io/githubpage/" target="_blank" rel="noopener" data-i18n="nav.main">Main Portfolio ↗</a>
+    </nav>
+  </div>
+</footer>
+
+<script src="../vendor/exifr.min.js?v=1"></script>
+<script src="../js/i18n.js?v=1"></script>
+<script src="../js/toolkit.js?v=1"></script>
+<script src="../js/cull.js?v=1"></script>
+</body>
+</html>

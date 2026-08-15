@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Shutterlog</title>
+<meta name="description" content="旅ごとの写真アルバム。撮影日時のほか、焦点距離・絞り・ISO でも並べ替えられます。" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230a0d12'/%3E%3Ccircle cx='16' cy='17' r='7' fill='none' stroke='%232c98f0' stroke-width='2'/%3E%3Cpath d='M9 10l2-3h10l2 3' fill='none' stroke='%232c98f0' stroke-width='2'/%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="style.css?v=5" />
+</head>
+<body class="page-trip">
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header is-stuck" id="site-header">
+  <div class="wrap">
+    <a class="brand" href="./"><b>Shutterlog</b><span>Photo &amp; Travel</span></a>
+    <button type="button" class="nav-toggle js-nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="site-nav"><span></span></button>
+    <nav class="site-nav" id="site-nav" aria-label="Section">
+      <ul>
+        <li><a href="./#globe"   data-i18n="nav.globe">Globe</a></li>
+        <li><a href="./#archive" data-i18n="nav.archive">Archive</a></li>
+        <li><a href="tools/cull.html" data-i18n="nav.tools">Tools</a></li>
+        <li><a href="./#about"   data-i18n="nav.about">About</a></li>
+      </ul>
+    </nav>
+    <div class="lang-switch" role="group" aria-label="Language / 言語 / 언어">
+      <button type="button" data-lang="ja" aria-pressed="true"  lang="ja">日本語</button>
+      <button type="button" data-lang="ko" aria-pressed="false" lang="ko">한국어</button>
+      <button type="button" data-lang="en" aria-pressed="false" lang="en">EN</button>
+    </div>
+  </div>
+</header>
+
+<main id="main" class="trip-page">
+  <div class="wrap">
+
+    <p class="trip-crumb"><a href="./#archive" data-i18n="trip.back">← 旅の一覧</a></p>
+
+    <header class="trip-head">
+      <span class="heading-meta" id="t-when">—</span>
+      <h1 id="t-title">—</h1>
+      <p class="trip-lead" id="t-note">—</p>
+      <div class="trip-chips" id="t-chips"></div>
+    </header>
+
+    <section class="trip-spots" id="t-spots-wrap" hidden>
+      <span class="heading-meta" data-i18n="trip.spots">訪れた街</span>
+      <ul class="spot-list" id="t-spots"></ul>
+    </section>
+
+    <div class="sortbar" id="sortbar" hidden>
+      <span class="sortbar-label" data-i18n="trip.sortBy">並べ替え</span>
+      <div class="sortbar-opts" role="group" id="sort-opts">
+        <button type="button" data-sort="date"    aria-pressed="true"  data-i18n="sort.date">撮影日時</button>
+        <button type="button" data-sort="focal"   aria-pressed="false" data-i18n="sort.focal">焦点距離</button>
+        <button type="button" data-sort="fnum"    aria-pressed="false" data-i18n="sort.fnum">絞り</button>
+        <button type="button" data-sort="iso"     aria-pressed="false" data-i18n="sort.iso">ISO</button>
+        <button type="button" data-sort="shutter" aria-pressed="false" data-i18n="sort.shutter">シャッター</button>
+        <button type="button" data-sort="name"    aria-pressed="false" data-i18n="sort.name">ファイル名</button>
+      </div>
+      <button type="button" class="sort-dir" id="sort-dir" aria-label="Direction" data-dir="asc">↑ <span data-i18n="trip.asc">昇順</span></button>
+    </div>
+
+    <div class="gallery" id="gallery"></div>
+
+    <div class="empty-state" id="empty" hidden>
+      <p data-i18n="trip.empty">この旅の写真はまだ入っていません。</p>
+      <p class="empty-how" data-i18n="trip.emptyHow">リポジトリの <code>photos/</code> の中の該当フォルダに JPEG を置いて <code>python3 build.py</code> を実行すると、ここに並びます。</p>
+      <p class="empty-folder"><code id="empty-folder">photos/</code></p>
+    </div>
+
+  </div>
+</main>
+
+<!-- 라이트박스 -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo" hidden>
+  <button type="button" class="lb-close" id="lb-close" aria-label="Close">✕</button>
+  <button type="button" class="lb-nav lb-prev" id="lb-prev" aria-label="Previous">‹</button>
+  <button type="button" class="lb-nav lb-next" id="lb-next" aria-label="Next">›</button>
+  <figure class="lb-figure">
+    <img id="lb-img" src="" alt="" />
+    <figcaption class="lb-meta">
+      <span class="lb-count" id="lb-count">1 / 1</span>
+      <span class="lb-exif" id="lb-exif">—</span>
+    </figcaption>
+  </figure>
+</div>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p>&copy; <span id="year">2026</span> Younsu Han · 韓倫洙</p>
+    <nav>
+      <a href="./" data-i18n="nav.back">← Shutterlog</a>
+      <a href="https://yshhan36565362.github.io/githubpage/" target="_blank" rel="noopener" data-i18n="nav.main">Main Portfolio ↗</a>
+    </nav>
+  </div>
+</footer>
+
+<script src="data/trips.js?v=1"></script>
+<script src="js/i18n.js?v=1"></script>
+<script src="js/trip.js?v=1"></script>
+</body>
+</html>

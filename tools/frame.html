@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>額装 | Shutterlog Tools</title>
+<meta name="description" content="EXIF を余白に刻む額縁と、写真の雰囲気に合わせて調整できるウォーターマーク。ブラウザ内で書き出します。" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230a0d12'/%3E%3Crect x='7' y='7' width='18' height='14' fill='none' stroke='%232fa499' stroke-width='2'/%3E%3Cpath d='M7 25h18' stroke='%232fa499' stroke-width='2'/%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../style.css?v=5" />
+<link rel="stylesheet" href="../tools.css?v=1" />
+</head>
+<body style="--accent: var(--teal)">
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header is-stuck">
+  <div class="wrap">
+    <a class="brand" href="../"><b>Shutterlog</b><span>Photo &amp; Travel</span></a>
+    <button type="button" class="nav-toggle js-nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="site-nav"><span></span></button>
+    <nav class="site-nav" id="site-nav" aria-label="Section">
+      <ul>
+        <li><a href="../#globe" data-i18n="nav.globe">Globe</a></li>
+        <li><a href="../#archive" data-i18n="nav.archive">Archive</a></li>
+        <li><a href="../#about" data-i18n="nav.about">About</a></li>
+      </ul>
+    </nav>
+    <div class="lang-switch" role="group" aria-label="Language / 言語 / 언어">
+      <button type="button" data-lang="ja" aria-pressed="true"  lang="ja">日本語</button>
+      <button type="button" data-lang="ko" aria-pressed="false" lang="ko">한국어</button>
+      <button type="button" data-lang="en" aria-pressed="false" lang="en">EN</button>
+    </div>
+  </div>
+</header>
+
+<main id="main" class="tool-page">
+  <div class="wrap">
+
+    <nav class="tool-steps" aria-label="Tools">
+      <a href="cull.html">01 <span data-i18n="cull.title">選別</span></a>
+      <a href="stats.html">02 <span data-i18n="stats.title">分析</span></a>
+      <a href="frame.html" aria-current="page">03 <span data-i18n="frame.title">額装</span></a>
+    </nav>
+
+    <header class="tool-head">
+      <span class="step">STEP 03</span>
+      <h1 data-i18n="frame.title">額装</h1>
+      <p data-i18n="frame.lead">機材と設定を余白に刻んだ一枚を書き出します。フォントはこのサイトと同じ Quicksand + Playfair です。</p>
+    </header>
+
+    <section class="dropzone" id="dz">
+      <svg class="dz-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+        <rect x="3" y="4" width="18" height="13" rx="1"/><path d="M3 20h18"/><path d="M7 13l3.5-4 3 3.5L16 10l3 3"/>
+      </svg>
+      <h2 data-i18n="dz.title">写真をここにドロップ</h2>
+      <p class="dz-or" data-i18n="dz.or">または</p>
+      <label class="btn btn-primary" for="picker" data-i18n="dz.pick">ファイルを選ぶ</label>
+      <input type="file" id="picker" accept="image/*" />
+      <p class="dz-note" data-i18n="dz.note">JPEG / PNG。写真は端末から出ません。</p>
+    </section>
+
+    <div class="editor" id="editor" hidden style="margin-top:26px">
+
+      <div class="stage-wrap">
+        <canvas id="frame-canvas" width="1200" height="900"></canvas>
+      </div>
+
+      <div class="editor-side">
+
+        <section class="panel">
+          <h3 data-i18n="frame.style">額縁</h3>
+          <div class="seg" id="seg-style">
+            <button type="button" data-style="minimal" aria-pressed="true"  data-i18n="frame.style1">ミニマル</button>
+            <button type="button" data-style="film"    aria-pressed="false" data-i18n="frame.style2">フィルム</button>
+            <button type="button" data-style="dark"    aria-pressed="false" data-i18n="frame.style3">ダーク</button>
+          </div>
+
+          <div class="fields" style="margin-top:18px">
+            <div class="field">
+              <label data-i18n="frame.ratio">書き出し比率</label>
+              <div class="seg" id="seg-ratio">
+                <button type="button" data-ratio="orig" aria-pressed="true" data-i18n="frame.ratioOrig">元のまま</button>
+                <button type="button" data-ratio="1:1"  aria-pressed="false">1:1</button>
+                <button type="button" data-ratio="4:5"  aria-pressed="false">4:5</button>
+                <button type="button" data-ratio="3:2"  aria-pressed="false">3:2</button>
+                <button type="button" data-ratio="16:9" aria-pressed="false">16:9</button>
+                <button type="button" data-ratio="9:16" aria-pressed="false">9:16</button>
+              </div>
+            </div>
+            <div class="field">
+              <label for="accent"><span data-i18n="frame.accent">アクセント色</span></label>
+              <input type="color" id="accent" value="#2c98f0" />
+              <label class="check" style="margin-top:8px">
+                <input type="checkbox" id="accent-auto" checked />
+                <span data-i18n="frame.accentAuto">写真から自動</span>
+              </label>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel">
+          <h3 data-i18n="frame.caption">キャプション</h3>
+          <div class="checks">
+            <label class="check"><input type="checkbox" id="cap-cam"  checked /><span data-i18n="frame.showCam">ボディ</span></label>
+            <label class="check"><input type="checkbox" id="cap-lens" checked /><span data-i18n="frame.showLens">レンズ</span></label>
+            <label class="check"><input type="checkbox" id="cap-exp"  checked /><span data-i18n="frame.showExp">露出</span></label>
+            <label class="check"><input type="checkbox" id="cap-date" checked /><span data-i18n="frame.showDate">日付</span></label>
+            <label class="check"><input type="checkbox" id="cap-place" checked /><span data-i18n="frame.showPlace">場所</span></label>
+          </div>
+          <div class="fields" style="margin-top:16px">
+            <div class="field">
+              <label for="place" data-i18n="frame.place">場所（任意）</label>
+              <input type="text" id="place" placeholder="Kyoto, Japan" />
+            </div>
+          </div>
+        </section>
+
+        <section class="panel">
+          <h3 data-i18n="frame.wm">ウォーターマーク</h3>
+          <div class="fields">
+            <div class="field">
+              <label for="wm-text" data-i18n="frame.wmText">サイン文字</label>
+              <input type="text" id="wm-text" value="Younsu Han" />
+            </div>
+            <div class="field">
+              <label for="wm-img" data-i18n="frame.wmImg">画像を使う (PNG)</label>
+              <input type="file" id="wm-img" accept="image/png,image/svg+xml" style="display:block;font-size:11px" />
+            </div>
+          </div>
+
+          <label class="check" style="margin-top:14px">
+            <input type="checkbox" id="wm-in-caption" checked />
+            <span data-i18n="frame.wmInCaption">額縁のキャプション行に入れる</span>
+          </label>
+          <p class="panel-help" data-i18n="frame.wmInCaptionNote">額縁を使うときは写真の上ではなくキャプション行に置いたほうが、写真を隠さずに済みます。</p>
+
+          <div id="wm-overlay-opts">
+            <div class="field" style="margin-top:14px">
+              <label data-i18n="frame.wmPos">位置</label>
+              <div class="seg" id="seg-pos">
+                <button type="button" data-pos="auto" aria-pressed="true" data-i18n="frame.wmAuto">自動（明るさで判定）</button>
+                <button type="button" data-pos="tl" aria-pressed="false">↖</button>
+                <button type="button" data-pos="tr" aria-pressed="false">↗</button>
+                <button type="button" data-pos="bl" aria-pressed="false">↙</button>
+                <button type="button" data-pos="br" aria-pressed="false">↘</button>
+              </div>
+            </div>
+            <div class="fields two" style="margin-top:14px">
+              <div class="field">
+                <label for="wm-color" data-i18n="frame.wmColor">色</label>
+                <input type="color" id="wm-color" value="#ffffff" />
+              </div>
+              <div class="field">
+                <label for="wm-size"><span data-i18n="frame.wmSize">大きさ</span> — <span class="val" id="val-size">3.2%</span></label>
+                <input type="range" id="wm-size" min="10" max="90" step="1" value="32" />
+              </div>
+            </div>
+            <div class="field" style="margin-top:14px">
+              <label for="wm-op"><span data-i18n="frame.wmOpacity">不透明度</span> — <span class="val" id="val-op">70%</span></label>
+              <input type="range" id="wm-op" min="5" max="100" step="1" value="70" />
+            </div>
+          </div>
+        </section>
+
+        <div class="actions">
+          <button type="button" class="btn btn-sm btn-teal" id="btn-png" data-i18n="frame.save">PNG で保存</button>
+          <button type="button" class="btn btn-sm btn-outline" id="btn-jpg" data-i18n="frame.saveJpg">JPEG で保存</button>
+          <button type="button" class="btn btn-sm btn-outline" id="btn-reset" data-i18n="common.reset">最初から</button>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p>&copy; <span id="year">2026</span> Younsu Han · 韓倫洙</p>
+    <nav>
+      <a href="../" data-i18n="nav.back">← Shutterlog</a>
+      <a href="https://yshhan36565362.github.io/githubpage/" target="_blank" rel="noopener" data-i18n="nav.main">Main Portfolio ↗</a>
+    </nav>
+  </div>
+</footer>
+
+<script src="../vendor/exifr.min.js?v=1"></script>
+<script src="../js/i18n.js?v=1"></script>
+<script src="../js/toolkit.js?v=1"></script>
+<script src="../js/frame.js?v=1"></script>
+</body>
+</html>

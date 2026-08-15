@@ -1,0 +1,656 @@
+{
+ "generatedAt": "2026-08-15T04:18:39",
+ "regions": [
+  {
+   "key": "japan",
+   "lat": 36.2,
+   "lon": 138.2,
+   "zoom": 1,
+   "name": {
+    "ja": "日本",
+    "ko": "일본",
+    "en": "Japan"
+   }
+  },
+  {
+   "key": "greater-china",
+   "lat": 27.5,
+   "lon": 117.5,
+   "zoom": 1,
+   "name": {
+    "ja": "中華圏",
+    "ko": "중화권",
+    "en": "Greater China"
+   }
+  },
+  {
+   "key": "europe",
+   "lat": 48.0,
+   "lon": 6.0,
+   "zoom": 1,
+   "name": {
+    "ja": "ヨーロッパ",
+    "ko": "유럽",
+    "en": "Europe"
+   }
+  }
+ ],
+ "home": {
+  "country": "410",
+  "lat": 37.57,
+  "lon": 126.98,
+  "name": {
+   "ja": "ソウル",
+   "ko": "서울",
+   "en": "Seoul"
+  }
+ },
+ "visitedCountries": [
+  "392",
+  "158",
+  "156",
+  "826",
+  "250",
+  "276",
+  "380",
+  "756",
+  "724",
+  "056",
+  "528"
+ ],
+ "totals": {
+  "trips": 10,
+  "photos": 0,
+  "countries": 11,
+  "cities": 32
+ },
+ "trips": [
+  {
+   "folder": "2018-08_hongkong-macau",
+   "region": "greater-china",
+   "date": "2018-08-10",
+   "endDate": "2018-08-14",
+   "needsReview": true,
+   "countries": [
+    "156"
+   ],
+   "title": {
+    "ja": "香港・マカオ",
+    "ko": "홍콩·마카오",
+    "en": "Hong Kong & Macau"
+   },
+   "note": {
+    "ja": "はじめての海外。夜景とネオンの色に驚いた旅でした。",
+    "ko": "첫 해외여행. 야경과 네온 색에 놀랐던 여행.",
+    "en": "My first trip abroad — the night skyline and neon colours were a shock."
+   },
+   "spots": [
+    {
+     "key": "hongkong",
+     "lat": 22.302,
+     "lon": 114.177,
+     "name": {
+      "ja": "香港",
+      "ko": "홍콩",
+      "en": "Hong Kong"
+     }
+    },
+    {
+     "key": "macau",
+     "lat": 22.199,
+     "lon": 113.544,
+     "name": {
+      "ja": "マカオ",
+      "ko": "마카오",
+      "en": "Macau"
+     }
+    }
+   ],
+   "cover": "thumbs/_placeholder/2018-08_hongkong-macau.svg",
+   "photos": [],
+   "count": 0,
+   "hasPhotos": false
+  },
+  {
+   "folder": "2019-01_taipei",
+   "region": "greater-china",
+   "date": "2019-01-15",
+   "endDate": "2019-01-19",
+   "needsReview": true,
+   "countries": [
+    "158"
+   ],
+   "title": {
+    "ja": "台北",
+    "ko": "타이베이",
+    "en": "Taipei"
+   },
+   "note": {
+    "ja": "路地と屋台の灯り。夜に強いレンズがほしくなった旅。",
+    "ko": "골목과 야시장의 불빛. 야간에 강한 렌즈가 갖고 싶어진 여행.",
+    "en": "Alleys and night-market lights — the trip that made me want a faster lens."
+   },
+   "spots": [
+    {
+     "key": "taipei",
+     "lat": 25.033,
+     "lon": 121.565,
+     "name": {
+      "ja": "台北",
+      "ko": "타이베이",
+      "en": "Taipei"
+     }
+    }
+   ],
+   "cover": "thumbs/_placeholder/2019-01_taipei.svg",
+   "photos": [],
+   "count": 0,
+   "hasPhotos": false
+  },
+  {
+   "folder": "2019-08_beijing",
+   "region": "greater-china",
+   "date": "2019-08-05",
+   "endDate": "2019-08-09",
+   "needsReview": true,
+   "countries": [
+    "156"
+   ],
+   "title": {
+    "ja": "北京",
+    "ko": "베이징",
+    "en": "Beijing"
+   },
+   "note": {
+    "ja": "広い。とにかく広い。広角の必要性を体で覚えました。",
+    "ko": "넓다. 정말 넓다. 광각의 필요성을 몸으로 배운 곳.",
+    "en": "Vast. Simply vast — this is where I learned why wide angles exist."
+   },
+   "spots": [
+    {
+     "key": "beijing",
+     "lat": 39.904,
+     "lon": 116.407,
+     "name": {
+      "ja": "北京",
+      "ko": "베이징",
+      "en": "Beijing"
+     }
+    }
+   ],
+   "cover": "thumbs/_placeholder/2019-08_beijing.svg",
+   "photos": [],
+   "count": 0,
+   "hasPhotos": false
+  },
+  {
+   "folder": "2023-02_hongkong-macau",
+   "region": "greater-china",
+   "date": "2023-02-10",
+   "endDate": "2023-02-14",
+   "needsReview": true,
+   "countries": [
+    "156"
+   ],
+   "title": {
+    "ja": "香港・マカオ（2回目）",
+    "ko": "홍콩·마카오 (두 번째)",
+    "en": "Hong Kong & Macau (2nd)"
+   },
+   "note": {
+    "ja": "同じ街を数年ぶりに。前より上手く撮れているか確かめる旅でもありました。",
+    "ko": "같은 도시를 몇 년 만에. 예전보다 잘 찍는지 확인하는 여행이기도 했다.",
+    "en": "The same city years later — partly a test of whether I had gotten any better."
+   },
+   "spots": [
+    {
+     "key": "hongkong",
+     "lat": 22.302,
+     "lon": 114.177,
+     "name": {
+      "ja": "香港",
+      "ko": "홍콩",
+      "en": "Hong Kong"
+     }
+    },
+    {
+     "key": "macau",
+     "lat": 22.199,
+     "lon": 113.544,
+     "name": {
+      "ja": "マカオ",
+      "ko": "마카오",
+      "en": "Macau"
+     }
+    }
+   ],
+   "cover": "thumbs/_placeholder/2023-02_hongkong-macau.svg",
+   "photos": [],
+   "count": 0,
+   "hasPhotos": false
+  },
+  {
+   "folder": "2023-08_tokyo",
+   "region": "japan",
+   "date": "2023-08-12",
+   "endDate": "2023-08-17",
+   "needsReview": true,
+   "countries": [
+    "392"
+   ],
+   "title": {
+    "ja": "東京",
+    "ko": "도쿄",
+    "en": "Tokyo"
+   },
+   "note": {
+    "ja": "はじめての日本。標識も看板も全部撮っていました。",
+    "ko": "첫 일본. 표지판이고 간판이고 전부 찍고 다녔다.",
+    "en": "My first time in Japan. I photographed every sign I walked past."
+   },
+   "spots": [
+    {
+     "key": "tokyo",
+     "lat": 35.676,
+     "lon": 139.65,
+     "name": {
+      "ja": "東京",
+      "ko": "도쿄",
+      "en": "Tokyo"
+     }
+    }
+   ],
+   "cover": "thumbs/_placeholder/2023-08_tokyo.svg",
+   "photos": [],
+   "count": 0,
+   "hasPhotos": false
+  },
+  {
+   "folder": "2024-01_sapporo",
+   "region": "japan",
+   "date": "2024-01-20",
+   "endDate": "2024-01-24",
+   "needsReview": true,
+   "countries": [
+    "392"
+   ],
+   "title": {
+    "ja": "札幌",
+    "ko": "삿포로",
+    "en": "Sapporo"
+   },
+   "note": {
+    "ja": "雪。露出補正を＋に振らないと全部灰色になることを学びました。",
+    "ko": "눈. 노출 보정을 +로 주지 않으면 전부 회색이 된다는 걸 배웠다.",
+    "en": "Snow — where I learned that without positive exposure compensation everything turns grey."
+   },
+   "spots": [
+    {
+     "key": "sapporo",
+     "lat": 43.062,
+     "lon": 141.354,
+     "name": {
+      "ja": "札幌",
+      "ko": "삿포로",
+      "en": "Sapporo"
+     }
+    }
+   ],
+   "cover": "thumbs/_placeholder/2024-01_sapporo.svg",
+   "photos": [],
+   "count": 0,
+   "hasPhotos": false
+  },
+  {
+   "folder": "2024-08_kansai",
+   "region": "japan",
+   "date": "2024-08-01",
+   "endDate": "2024-08-14",
+   "needsReview": true,
+   "countries": [
+    "392"
+   ],
+   "title": {
+    "ja": "関西バックパッキング",
+    "ko": "간사이 배낭여행",
+    "en": "Kansai Backpacking"
+   },
+   "note": {
+    "ja": "大阪から鳥取・高松まで、10都市を歩いた 2 週間。いちばん枚数が多い旅です。",
+    "ko": "오사카에서 돗토리·다카마쓰까지 10개 도시를 걸은 2주. 가장 많이 찍은 여행.",
+    "en": "Two weeks and ten cities, from Osaka out to Tottori and Takamatsu. My highest frame count."
+   },
+   "spots": [
+    {
+     "key": "osaka",
+     "lat": 34.694,
+     "lon": 135.502,
+     "name": {
+      "ja": "大阪",
+      "ko": "오사카",
+      "en": "Osaka"
+     }
+    },
+    {
+     "key": "kyoto",
+     "lat": 35.011,
+     "lon": 135.768,
+     "name": {
+      "ja": "京都",
+      "ko": "교토",
+      "en": "Kyoto"
+     }
+    },
+    {
+     "key": "nara",
+     "lat": 34.685,
+     "lon": 135.805,
+     "name": {
+      "ja": "奈良",
+      "ko": "나라",
+      "en": "Nara"
+     }
+    },
+    {
+     "key": "kobe",
+     "lat": 34.69,
+     "lon": 135.196,
+     "name": {
+      "ja": "神戸",
+      "ko": "고베",
+      "en": "Kobe"
+     }
+    },
+    {
+     "key": "himeji",
+     "lat": 34.815,
+     "lon": 134.686,
+     "name": {
+      "ja": "姫路",
+      "ko": "히메지",
+      "en": "Himeji"
+     }
+    },
+    {
+     "key": "okayama",
+     "lat": 34.655,
+     "lon": 133.919,
+     "name": {
+      "ja": "岡山",
+      "ko": "오카야마",
+      "en": "Okayama"
+     }
+    },
+    {
+     "key": "tottori",
+     "lat": 35.501,
+     "lon": 134.238,
+     "name": {
+      "ja": "鳥取",
+      "ko": "돗토리",
+      "en": "Tottori"
+     }
+    },
+    {
+     "key": "takamatsu",
+     "lat": 34.343,
+     "lon": 134.047,
+     "name": {
+      "ja": "高松",
+      "ko": "다카마쓰",
+      "en": "Takamatsu"
+     }
+    },
+    {
+     "key": "nagoya",
+     "lat": 35.181,
+     "lon": 136.907,
+     "name": {
+      "ja": "名古屋",
+      "ko": "나고야",
+      "en": "Nagoya"
+     }
+    },
+    {
+     "key": "mie",
+     "lat": 34.489,
+     "lon": 136.709,
+     "name": {
+      "ja": "三重",
+      "ko": "미에",
+      "en": "Mie"
+     }
+    }
+   ],
+   "cover": "thumbs/_placeholder/2024-08_kansai.svg",
+   "photos": [],
+   "count": 0,
+   "hasPhotos": false
+  },
+  {
+   "folder": "2025-01_nagoya-fuji-tokyo",
+   "region": "japan",
+   "date": "2025-01-10",
+   "endDate": "2025-01-16",
+   "needsReview": true,
+   "countries": [
+    "392"
+   ],
+   "title": {
+    "ja": "名古屋・富士山・東京",
+    "ko": "나고야·후지산·도쿄",
+    "en": "Nagoya, Mt. Fuji & Tokyo"
+   },
+   "note": {
+    "ja": "冬の澄んだ空気で富士山がよく見えた回。望遠を持って行って正解でした。",
+    "ko": "겨울 맑은 공기 덕에 후지산이 잘 보였던 회차. 망원을 챙겨간 게 정답이었다.",
+    "en": "Winter air so clear that Fuji stayed visible all day. Bringing the tele was the right call."
+   },
+   "spots": [
+    {
+     "key": "nagoya",
+     "lat": 35.181,
+     "lon": 136.907,
+     "name": {
+      "ja": "名古屋",
+      "ko": "나고야",
+      "en": "Nagoya"
+     }
+    },
+    {
+     "key": "fuji",
+     "lat": 35.361,
+     "lon": 138.727,
+     "name": {
+      "ja": "富士山",
+      "ko": "후지산",
+      "en": "Mt. Fuji"
+     }
+    },
+    {
+     "key": "tokyo",
+     "lat": 35.676,
+     "lon": 139.65,
+     "name": {
+      "ja": "東京",
+      "ko": "도쿄",
+      "en": "Tokyo"
+     }
+    }
+   ],
+   "cover": "thumbs/_placeholder/2025-01_nagoya-fuji-tokyo.svg",
+   "photos": [],
+   "count": 0,
+   "hasPhotos": false
+  },
+  {
+   "folder": "2025-08_europe",
+   "region": "europe",
+   "date": "2025-08-01",
+   "endDate": "2025-08-25",
+   "needsReview": true,
+   "countries": [
+    "826",
+    "250",
+    "276",
+    "380",
+    "756",
+    "724",
+    "056",
+    "528"
+   ],
+   "title": {
+    "ja": "ヨーロッパ 8か国",
+    "ko": "유럽 8개국",
+    "en": "Eight Countries in Europe"
+   },
+   "note": {
+    "ja": "イギリスからオランダまで。国が変わるたびに光の色が変わるのが面白かった。",
+    "ko": "영국에서 네덜란드까지. 나라가 바뀔 때마다 빛의 색이 달라지는 게 재미있었다.",
+    "en": "From Britain to the Netherlands — the colour of the light changed with every border."
+   },
+   "spots": [
+    {
+     "key": "london",
+     "lat": 51.507,
+     "lon": -0.128,
+     "name": {
+      "ja": "ロンドン",
+      "ko": "런던",
+      "en": "London"
+     }
+    },
+    {
+     "key": "paris",
+     "lat": 48.857,
+     "lon": 2.352,
+     "name": {
+      "ja": "パリ",
+      "ko": "파리",
+      "en": "Paris"
+     }
+    },
+    {
+     "key": "brussels",
+     "lat": 50.847,
+     "lon": 4.353,
+     "name": {
+      "ja": "ブリュッセル",
+      "ko": "브뤼셀",
+      "en": "Brussels"
+     }
+    },
+    {
+     "key": "amsterdam",
+     "lat": 52.37,
+     "lon": 4.895,
+     "name": {
+      "ja": "アムステルダム",
+      "ko": "암스테르담",
+      "en": "Amsterdam"
+     }
+    },
+    {
+     "key": "berlin",
+     "lat": 52.52,
+     "lon": 13.405,
+     "name": {
+      "ja": "ベルリン",
+      "ko": "베를린",
+      "en": "Berlin"
+     }
+    },
+    {
+     "key": "zurich",
+     "lat": 47.377,
+     "lon": 8.542,
+     "name": {
+      "ja": "チューリッヒ",
+      "ko": "취리히",
+      "en": "Zurich"
+     }
+    },
+    {
+     "key": "interlaken",
+     "lat": 46.686,
+     "lon": 7.863,
+     "name": {
+      "ja": "インターラーケン",
+      "ko": "인터라켄",
+      "en": "Interlaken"
+     }
+    },
+    {
+     "key": "rome",
+     "lat": 41.903,
+     "lon": 12.496,
+     "name": {
+      "ja": "ローマ",
+      "ko": "로마",
+      "en": "Rome"
+     }
+    },
+    {
+     "key": "barcelona",
+     "lat": 41.385,
+     "lon": 2.173,
+     "name": {
+      "ja": "バルセロナ",
+      "ko": "바르셀로나",
+      "en": "Barcelona"
+     }
+    },
+    {
+     "key": "madrid",
+     "lat": 40.417,
+     "lon": -3.704,
+     "name": {
+      "ja": "マドリード",
+      "ko": "마드리드",
+      "en": "Madrid"
+     }
+    }
+   ],
+   "cover": "thumbs/_placeholder/2025-08_europe.svg",
+   "photos": [],
+   "count": 0,
+   "hasPhotos": false
+  },
+  {
+   "folder": "2026-02_tokyo",
+   "region": "japan",
+   "date": "2026-02-10",
+   "endDate": "2026-02-15",
+   "needsReview": true,
+   "countries": [
+    "392"
+   ],
+   "title": {
+    "ja": "東京（2回目）",
+    "ko": "도쿄 (두 번째)",
+    "en": "Tokyo (2nd)"
+   },
+   "note": {
+    "ja": "働きたい街をもう一度、観光ではなく生活の目線で歩いた回。",
+    "ko": "일하고 싶은 도시를 다시, 관광이 아니라 생활의 시선으로 걸었던 회차.",
+    "en": "Walking the city I want to work in again — this time as a resident, not a tourist."
+   },
+   "spots": [
+    {
+     "key": "tokyo",
+     "lat": 35.676,
+     "lon": 139.65,
+     "name": {
+      "ja": "東京",
+      "ko": "도쿄",
+      "en": "Tokyo"
+     }
+    }
+   ],
+   "cover": "thumbs/_placeholder/2026-02_tokyo.svg",
+   "photos": [],
+   "count": 0,
+   "hasPhotos": false
+  }
+ ]
+}

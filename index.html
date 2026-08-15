@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Shutterlog | 韓倫洙の写真と旅</title>
+<meta name="description" content="ハンヨンス（韓倫洙）の趣味ポートフォリオ。旅の写真アーカイブと、自分の撮影ワークフローのために作った 3 つのブラウザツール（選別・EXIF 分析・額装）。" />
+<meta property="og:title" content="Shutterlog | 韓倫洙の写真と旅" />
+<meta property="og:description" content="旅の写真アーカイブと、自分のために作った写真ツール。すべてブラウザ内で動きます。" />
+<meta property="og:type" content="website" />
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230a0d12'/%3E%3Ccircle cx='16' cy='17' r='7' fill='none' stroke='%232c98f0' stroke-width='2'/%3E%3Cpath d='M9 10l2-3h10l2 3' fill='none' stroke='%232c98f0' stroke-width='2'/%3E%3C/svg%3E" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet" />
+
+<!-- ?v= 는 캐시 무효화용입니다. CSS / JS 를 고칠 때마다 숫자를 올리세요. -->
+<link rel="stylesheet" href="style.css?v=5" />
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header" id="site-header">
+  <div class="wrap">
+    <a class="brand" href="./"><b>Shutterlog</b><span>Photo &amp; Travel</span></a>
+
+    <button type="button" class="nav-toggle js-nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="site-nav">
+      <span></span>
+    </button>
+
+    <nav class="site-nav" id="site-nav" aria-label="Section">
+      <ul>
+        <li><a href="#globe"   data-i18n="nav.globe">Globe</a></li>
+        <li><a href="#archive" data-i18n="nav.archive">Archive</a></li>
+        <li><a href="#tools"   data-i18n="nav.tools">Tools</a></li>
+        <li><a href="#about"   data-i18n="nav.about">About</a></li>
+        <li><a href="https://yshhan36565362.github.io/githubpage/" target="_blank" rel="noopener" data-i18n="nav.main">Main Portfolio ↗</a></li>
+      </ul>
+    </nav>
+
+    <div class="lang-switch" role="group" aria-label="Language / 言語 / 언어">
+      <button type="button" data-lang="ja" aria-pressed="true"  lang="ja">日本語</button>
+      <button type="button" data-lang="ko" aria-pressed="false" lang="ko">한국어</button>
+      <button type="button" data-lang="en" aria-pressed="false" lang="en">EN</button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ============================================================== -->
+  <!-- 지구본                                                          -->
+  <!-- ============================================================== -->
+  <section class="globe-stage" id="globe">
+    <canvas id="globe-canvas" aria-hidden="true"></canvas>
+    <div class="globe-markers" id="globe-markers"></div>
+
+    <div class="globe-fallback">
+      <div>
+        <span class="heading-meta">Travel Archive</span>
+        <h2 class="section-heading" data-i18n="globe.fallbackTitle">お使いの環境では地球儀を表示できません</h2>
+        <p style="margin-top:16px;color:var(--dim)" data-i18n="globe.fallbackBody">下の一覧から旅ごとにご覧いただけます。</p>
+        <p style="margin-top:20px"><a class="btn btn-primary" href="#archive" data-i18n="globe.fallbackCta">旅の一覧へ</a></p>
+      </div>
+    </div>
+
+    <div class="globe-ui">
+      <div class="globe-intro">
+        <span class="heading-meta" data-i18n="globe.eyebrow">Travel Archive</span>
+        <h1 id="globe-title">
+          <span data-i18n="globe.title1">歩いた場所を、</span><br />
+          <span class="accent" data-i18n="globe.title2">一枚ずつ</span>
+        </h1>
+        <p data-i18n="globe.lead">ドラッグで回して、ホイールで近づいてください。近づくほど、その土地の写真が増えます。</p>
+      </div>
+
+      <div class="globe-stats" id="globe-stats" aria-live="polite">
+        <div><b data-count="countries">11</b><span data-i18n="stats.countries">Countries</span></div>
+        <div><b data-count="cities">32</b><span data-i18n="stats.cities">Cities</span></div>
+        <div><b data-count="trips">10</b><span data-i18n="stats.trips">Trips</span></div>
+        <div><b data-count="photos">0</b><span data-i18n="stats.photos">Photos</span></div>
+      </div>
+
+      <div class="globe-zoom" role="group" aria-label="Zoom">
+        <button type="button" id="zoom-in" aria-label="Zoom in">＋</button>
+        <div class="zoom-rail"><div class="zoom-fill" id="zoom-fill"></div></div>
+        <button type="button" id="zoom-out" aria-label="Zoom out">−</button>
+        <span class="zoom-level" id="zoom-level">WORLD</span>
+      </div>
+
+      <p class="globe-hint">
+        <span data-i18n="globe.hint1">ドラッグ = 回転</span><br />
+        <span data-i18n="globe.hint2">ホイール = ズーム</span><br />
+        <span data-i18n="globe.hint3">写真をクリック = その旅へ</span>
+      </p>
+
+      <article class="globe-peek" id="globe-peek" aria-live="polite">
+        <img id="peek-img" src="" alt="" />
+        <div class="globe-peek-body">
+          <span class="heading-meta" id="peek-when">—</span>
+          <h3 id="peek-title">—</h3>
+          <p id="peek-note">—</p>
+          <a class="btn btn-sm btn-primary" id="peek-link" href="#" data-i18n="globe.peekCta">この旅を見る</a>
+        </div>
+      </article>
+
+      <a class="globe-scroll" href="#archive"><span data-i18n="globe.scroll">Scroll</span></a>
+    </div>
+  </section>
+
+  <!-- ============================================================== -->
+  <!-- 여행 아카이브                                                    -->
+  <!-- ============================================================== -->
+  <section class="section" id="archive">
+    <div class="wrap">
+      <div class="heading-block reveal">
+        <span class="heading-meta" data-i18n="archive.eyebrow">Archive</span>
+        <h2 class="section-heading" data-i18n="archive.heading">旅ごとのアルバム</h2>
+        <p data-i18n="archive.lead">旅は行った順に並んでいます。各アルバムの中は撮影日時順が基本で、焦点距離・絞り・ISO でも並べ替えられます。</p>
+      </div>
+
+      <p class="trip-axis reveal"><span id="axis-label">2018 → 2026</span></p>
+
+      <div class="trip-grid" id="trip-grid">
+        <!-- JS 가 채웁니다. 스크립트가 죽었을 때를 위한 안내: -->
+        <noscript>
+          <p style="color:var(--dim)">旅の一覧を表示するには JavaScript が必要です。
+            <a href="data/trips.json">trips.json</a> に全データがあります。</p>
+        </noscript>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================== -->
+  <!-- 도구                                                            -->
+  <!-- ============================================================== -->
+  <section class="section section--alt" id="tools">
+    <div class="wrap">
+      <div class="heading-block reveal">
+        <span class="heading-meta" data-i18n="tools.eyebrow">Tools</span>
+        <h2 class="section-heading" data-i18n="tools.heading">写真ワークフローを自動化する</h2>
+        <p data-i18n="tools.lead">旅から帰るたびに手でやっていた作業を、そのままブラウザの中に移しました。写真はサーバーに一枚も送られません。すべて端末の中だけで処理されます。</p>
+      </div>
+
+      <div class="tool-grid">
+        <a class="tool-card reveal" href="tools/cull.html" style="--accent:var(--red)">
+          <span class="tool-step">01</span>
+          <h3 data-i18n="tool1.title">選別 — ブレたカットを外す</h3>
+          <p data-i18n="tool1.body">撮影時刻・焦点距離・画像ハッシュの三つで似たカットをまとめ、グループの中で相対的にいちばんシャープな一枚を提案します。消すのは必ず人間です。</p>
+          <span class="btn btn-sm btn-outline" data-i18n="tool.open">開く</span>
+        </a>
+
+        <a class="tool-card reveal" href="tools/stats.html" style="--accent:var(--primary)">
+          <span class="tool-step">02</span>
+          <h3 data-i18n="tool2.title">分析 — 自分の撮影癖を測る</h3>
+          <p data-i18n="tool2.body">焦点距離・絞り・ISO・時間帯の分布に加えて、どの設定で失敗しやすいかを出します。CSV を書き出して Python / R でさらに掘れます。</p>
+          <span class="btn btn-sm btn-outline" data-i18n="tool.open">開く</span>
+        </a>
+
+        <a class="tool-card reveal" href="tools/frame.html" style="--accent:var(--teal)">
+          <span class="tool-step">03</span>
+          <h3 data-i18n="tool3.title">額装 — EXIF の縁とサイン</h3>
+          <p data-i18n="tool3.body">機材と設定を下の余白に刻む額縁を 3 種類。ウォーターマークは位置・色・大きさ・不透明度を写真の雰囲気に合わせて調整できます。</p>
+          <span class="btn btn-sm btn-outline" data-i18n="tool.open">開く</span>
+        </a>
+      </div>
+
+      <div class="prose reveal" style="margin-top:4em">
+        <h3 data-i18n="tools.pipeTitle">4 つの段階がひとつの流れになっています</h3>
+        <p data-i18n="tools.pipeBody">機能を三つ並べたのではなく、「写真フォルダを入れるとポートフォリオの 1 ページが出てくる」までを一本の流れとして設計しました。選別 → 分析 → 額装 → アーカイブ。最後のアーカイブが、このページの上にある地球儀です。</p>
+        <div class="note-box" data-i18n="tools.privacy"><b>プライバシー：</b>3 つのツールはすべてブラウザ内で完結します。アップロードも保存も行いません。ページを閉じた時点で何も残りません。</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================== -->
+  <!-- About                                                          -->
+  <!-- ============================================================== -->
+  <section class="section" id="about">
+    <div class="wrap">
+      <div class="heading-block reveal">
+        <span class="heading-meta" data-i18n="about.eyebrow">About</span>
+        <h2 class="section-heading" data-i18n="about.heading">なぜ作ったか</h2>
+      </div>
+
+      <div class="prose reveal">
+        <p data-i18n="about.p1">趣味は写真です。旅から帰ると数千枚が残り、その中から人に見せられる十数枚を選ぶまでが毎回いちばん時間のかかる作業でした。手でやっていたその選別と整理を、専攻のデータ分析と結びつけて自動化したのがこのサイトです。</p>
+        <p data-i18n="about.p2">「なんとなく上手く撮れた気がする」を数字にしたかった、というのが出発点です。自分が選んだ写真の EXIF を集計すると、どの焦点距離・どの絞りで成功しているかがはっきり出ます。逆に 1/60 秒より遅いシャッターでの失敗率のような、感覚では気づけない限界も見えてきます。</p>
+
+        <h3 data-i18n="about.techTitle">技術メモ</h3>
+        <ul>
+          <li data-i18n="about.tech1"><strong>地球儀</strong>：three.js。国境は Natural Earth の GeoJSON をブラウザ内で等距円筒図法のキャンバスに描き、それを球に貼っています。訪問国の色は <code>trips.meta.json</code> から決まるので、国を足せば色も増えます。</li>
+          <li data-i18n="about.tech2"><strong>マーカー</strong>：3D スプライトではなく、3D 座標を画面座標に投影した本物の <code>&lt;img&gt;</code> です。写真がぼやけず、キーボード操作もそのまま効きます。</li>
+          <li data-i18n="about.tech3"><strong>EXIF</strong>：ツール側は exifr、サイト生成側は Python (Pillow)。同じ値を二か所で読むので、<code>build.py</code> の出力とツールの表示は一致します。</li>
+          <li data-i18n="about.tech4"><strong>依存関係</strong>：CDN は使いません。ライブラリはすべてリポジトリに同梱し、読み込みに失敗してもページ本体は動きます。以前 CDN の失敗でサイトが真っ白になった経験からの規則です。</li>
+        </ul>
+
+        <h3 data-i18n="about.repoTitle">リポジトリ</h3>
+        <p data-i18n="about.repoBody">写真の追加方法、フォルダの命名規則、<code>build.py</code> の使い方は README にまとめてあります。</p>
+        <p>
+          <a class="btn btn-primary" href="https://github.com/YSHHAN36565362/shutterlog" target="_blank" rel="noopener">GitHub</a>
+          <a class="btn btn-outline" href="https://yshhan36565362.github.io/githubpage/" target="_blank" rel="noopener" data-i18n="about.mainCta">メインのポートフォリオ</a>
+        </p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p>&copy; <span id="year">2026</span> Younsu Han · 韓倫洙</p>
+    <nav>
+      <a href="https://github.com/YSHHAN36565362" target="_blank" rel="noopener">GitHub</a>
+      <a href="mailto:colejason932@gmail.com">Email</a>
+      <a href="https://yshhan36565362.github.io/githubpage/" target="_blank" rel="noopener" data-i18n="nav.main">Main Portfolio ↗</a>
+    </nav>
+  </div>
+</footer>
+
+<!-- vendored — CDN 을 쓰지 않습니다. 하나가 실패해도 페이지는 살아 있습니다. -->
+<script src="vendor/three.min.js?v=1"></script>
+<script src="vendor/anime.min.js?v=1"></script>
+<script src="data/world-110m.js?v=1"></script>
+<script src="data/trips.js?v=1"></script>
+<script src="js/i18n.js?v=1"></script>
+<script src="js/globe.js?v=1"></script>
+<script src="js/main.js?v=1"></script>
+</body>
+</html>

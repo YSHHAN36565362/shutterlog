@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>分析 | Shutterlog Tools</title>
+<meta name="description" content="自分の写真の EXIF を集計し、どの設定で成功しているかを数字で見るツール。CSV を書き出して Python / R で掘り下げられます。" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230a0d12'/%3E%3Cg fill='%232c98f0'%3E%3Crect x='7' y='16' width='4' height='9'/%3E%3Crect x='14' y='10' width='4' height='15'/%3E%3Crect x='21' y='19' width='4' height='6'/%3E%3C/g%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../style.css?v=5" />
+<link rel="stylesheet" href="../tools.css?v=1" />
+</head>
+<body style="--accent: var(--primary)">
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header is-stuck">
+  <div class="wrap">
+    <a class="brand" href="../"><b>Shutterlog</b><span>Photo &amp; Travel</span></a>
+    <button type="button" class="nav-toggle js-nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="site-nav"><span></span></button>
+    <nav class="site-nav" id="site-nav" aria-label="Section">
+      <ul>
+        <li><a href="../#globe" data-i18n="nav.globe">Globe</a></li>
+        <li><a href="../#archive" data-i18n="nav.archive">Archive</a></li>
+        <li><a href="../#about" data-i18n="nav.about">About</a></li>
+      </ul>
+    </nav>
+    <div class="lang-switch" role="group" aria-label="Language / 言語 / 언어">
+      <button type="button" data-lang="ja" aria-pressed="true"  lang="ja">日本語</button>
+      <button type="button" data-lang="ko" aria-pressed="false" lang="ko">한국어</button>
+      <button type="button" data-lang="en" aria-pressed="false" lang="en">EN</button>
+    </div>
+  </div>
+</header>
+
+<main id="main" class="tool-page">
+  <div class="wrap">
+
+    <nav class="tool-steps" aria-label="Tools">
+      <a href="cull.html">01 <span data-i18n="cull.title">選別</span></a>
+      <a href="stats.html" aria-current="page">02 <span data-i18n="stats.title">分析</span></a>
+      <a href="frame.html">03 <span data-i18n="frame.title">額装</span></a>
+    </nav>
+
+    <header class="tool-head">
+      <span class="step">STEP 02</span>
+      <h1 data-i18n="stats.title">分析</h1>
+      <p data-i18n="stats.lead">自分が撮った写真の EXIF を集計します。どの設定で成功しているかを数字で見るためのものです。</p>
+    </header>
+
+    <section class="dropzone" id="dz">
+      <svg class="dz-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+        <path d="M3 21h18"/><rect x="4" y="12" width="4" height="7"/><rect x="10" y="6" width="4" height="13"/><rect x="16" y="15" width="4" height="4"/>
+      </svg>
+      <h2 data-i18n="dz.title">写真をここにドロップ</h2>
+      <p class="dz-or" data-i18n="dz.or">または</p>
+      <label class="btn btn-primary" for="picker" data-i18n="dz.pick">ファイルを選ぶ</label>
+      <input type="file" id="picker" accept="image/*" multiple />
+      <p class="dz-note" data-i18n="dz.note">JPEG / PNG。写真は端末から出ません。</p>
+
+      <div class="progress" id="progress" hidden>
+        <div class="progress-bar"><span id="progress-fill"></span></div>
+        <p class="progress-text" id="progress-text">0 / 0</p>
+      </div>
+    </section>
+
+    <div id="result" hidden>
+
+      <div class="summary" style="margin-top:26px">
+        <div><b id="i-focal">—</b><span data-i18n="stats.insightFocal">いちばん使う焦点距離</span><small id="i-focal-sub">—</small></div>
+        <div><b id="i-fnum">—</b><span data-i18n="stats.insightFnum">いちばん使う絞り</span><small id="i-fnum-sub">—</small></div>
+        <div><b id="i-hour">—</b><span data-i18n="stats.insightHour">いちばん撮る時間帯</span><small id="i-hour-sub">—</small></div>
+        <div><b id="i-limit">—</b><span data-i18n="stats.insightLimit">手ブレの目安</span><small id="i-limit-sub">—</small></div>
+      </div>
+
+      <div class="chart-grid">
+        <section class="chart"><h3 data-i18n="stats.focal">焦点距離</h3><p class="chart-sub" id="c-focal-sub"></p><div id="c-focal"></div></section>
+        <section class="chart"><h3 data-i18n="stats.fnum">絞り</h3><p class="chart-sub" id="c-fnum-sub"></p><div id="c-fnum"></div></section>
+        <section class="chart"><h3 data-i18n="stats.shutter">シャッター速度</h3><p class="chart-sub" id="c-shutter-sub"></p><div id="c-shutter"></div></section>
+        <section class="chart"><h3 data-i18n="stats.iso">ISO</h3><p class="chart-sub" id="c-iso-sub"></p><div id="c-iso"></div></section>
+        <section class="chart"><h3 data-i18n="stats.hour">撮影時間帯</h3><p class="chart-sub" id="c-hour-sub"></p><div id="c-hour"></div></section>
+        <section class="chart"><h3 data-i18n="stats.month">月別</h3><p class="chart-sub" id="c-month-sub"></p><div id="c-month"></div></section>
+        <section class="chart"><h3 data-i18n="stats.body">ボディ</h3><p class="chart-sub" id="c-body-sub"></p><div id="c-body"></div></section>
+        <section class="chart"><h3 data-i18n="stats.lens">レンズ</h3><p class="chart-sub" id="c-lens-sub"></p><div id="c-lens"></div></section>
+      </div>
+
+      <section class="chart" style="margin-top:20px">
+        <h3 data-i18n="stats.sharpTitle">シャッター速度と失敗率</h3>
+        <p class="chart-sub" data-i18n="stats.sharpLead">シャープネスの下位 25% を「失敗」とみなし、設定ごとの失敗率を出します。手ブレの限界が数字で出ます。</p>
+        <div id="c-fail"></div>
+        <div id="c-fail-focal" style="margin-top:24px"></div>
+      </section>
+
+      <div class="actions" style="margin-top:26px">
+        <button type="button" class="btn btn-primary" id="btn-csv" data-i18n="stats.csv">CSV を書き出す</button>
+        <button type="button" class="btn btn-outline" id="btn-reset" data-i18n="common.reset">最初から</button>
+      </div>
+      <p class="panel-help" data-i18n="stats.csvNote">書き出した CSV は <code>analysis/</code> の Python / R スクリプトでそのまま読めます。</p>
+    </div>
+
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p>&copy; <span id="year">2026</span> Younsu Han · 韓倫洙</p>
+    <nav>
+      <a href="../" data-i18n="nav.back">← Shutterlog</a>
+      <a href="https://yshhan36565362.github.io/githubpage/" target="_blank" rel="noopener" data-i18n="nav.main">Main Portfolio ↗</a>
+    </nav>
+  </div>
+</footer>
+
+<script src="../vendor/exifr.min.js?v=1"></script>
+<script src="../js/i18n.js?v=1"></script>
+<script src="../js/toolkit.js?v=1"></script>
+<script src="../js/stats.js?v=1"></script>
+</body>
+</html>
